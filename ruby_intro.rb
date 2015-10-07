@@ -82,7 +82,6 @@ class BookInStock
     else
       @isbn = isbn
     end
-
     if price <= 0 
       raise ArgumentError.new("price error")
     else
@@ -109,10 +108,4 @@ class BookInStock
   def price_as_string
     "$"+format("%0.2f",@price)
   end
-
 end
-
-
-
-
-
