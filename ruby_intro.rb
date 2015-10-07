@@ -1,11 +1,6 @@
 # When done, submit this entire file.
 
-#Author: Seventeen
-#Date: 2015/9/26
-
 # Part 1
-
-include Enumerable
 
 def sum arr
   sum_of_arr = 0
@@ -32,8 +27,10 @@ def sum_to_n? arr, n
   sort_arr = arr.sort
   j = arr.size-1
   i = 0
-  if (j+1 == 0 && n==0)||(j == 0 && n==arr.at(0))
-	result = true
+  if (j+1 == 0 && n==0)
+	result = false
+  elsif (j == 0 && n==arr.at(0))
+	result = false
   else
 	while i < j
 		if sort_arr.at(i)+ sort_arr.at(j) < n
@@ -56,15 +53,19 @@ def hello(name)
 end
 
 def starts_with_consonant? s
-  if s =~ /^[aeiou]/i
-	return true
-  else
-    return false
+  result = true
+  if s.empty?
+	  result = false
+  elsif !(s =~/^[a-z]/i)
+	  result = false
+  elsif s =~ /^[aeiou]/i
+	  result = false
   end
+  return result
 end
 
 def binary_multiple_of_4? s
-  if s =~ /^[01]*00$/
+  if s =~ /^[01]*00$/ || s == '0'
     return true
   else
     return false
@@ -74,13 +75,44 @@ end
 # Part 3
 
 class BookInStock
-  # YOUR CODE HERE
-  def initialize(isbn, price)
-	@book_isbn = isbn
-	@book_price = price
+
+  def initialize(isbn,price)
+    if isbn.empty?
+      raise ArgumentError.new("isbn error")
+    else
+      @isbn = isbn
+    end
+
+    if price <= 0 
+      raise ArgumentError.new("price error")
+    else
+      @price = price
+    end
   end
-  def price_as_string()
-	return "\$%.2f" % @book_price
+  
+  def isbn
+    @isbn
   end
+
+  def price
+    @price
+  end
+
+  def isbn=(value)
+    @isbn = value
+  end
+
+  def price=(value)
+    @price = value
+  end
+
+  def price_as_string
+    "$"+format("%0.2f",@price)
+  end
+
 end
+
+
+
+
 
