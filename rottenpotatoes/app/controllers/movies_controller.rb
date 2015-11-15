@@ -15,6 +15,9 @@ class MoviesController < ApplicationController
     @sorting_by = params[:sorting_by]
 	if @sorting_by == nil
 		@sorting_by = session[:sorting_by]
+		if @sorting_by == nil
+			@sorting_by = "title"
+		end
 		redirect_flag = true
 	end
 	session[:sorting_by] = @sorting_by
@@ -23,6 +26,9 @@ class MoviesController < ApplicationController
 	@ratings = params[:ratings]
 	if @ratings == nil
 		@ratings = session[:ratings]
+		if @ratings == nil
+			@ratings = @all_ratings
+		end
 		redirect_flag = true
 	elsif @ratings.kind_of?(Hash)
         @ratings = @ratings.keys
